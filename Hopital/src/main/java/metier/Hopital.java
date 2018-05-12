@@ -42,6 +42,12 @@ public class Hopital {
 		listeAttente.add(pin);
 	}
 	
+	public boolean restePatientEnAttente() {
+		if (listeAttente.size() > 0) {
+			return true;
+		} else {return false;}
+	}
+	
 	
 	
 }

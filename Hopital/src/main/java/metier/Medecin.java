@@ -22,7 +22,11 @@ public class Medecin extends Personnel {
 	}
 	
 	public void accueillirPatient() {
-		this.patientEnCours = Hopital.getInstance().getPatientATraiter();
+		if (Hopital.getInstance().restePatientEnAttente()) {
+			this.patientEnCours = Hopital.getInstance().getPatientATraiter();			
+		} else {
+			System.out.println("Aucun patient à traiter");
+		}
 	}
 
 	public Patient libererSalle() throws SQLException {
