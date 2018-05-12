@@ -24,6 +24,14 @@ public class Hopital {
 		return this.listeAttente;
 	}
 	
+	public void viderListeAttente() {
+		this.listeAttente = new LinkedList<Patient>();
+	}
+	
+	public void setListeAttente(LinkedList<Patient> list) {
+		this.listeAttente = list;
+	}
+	
 	public Patient getPatientATraiter() {		
 		Patient tmp = listeAttente.getFirst();
 		listeAttente.removeFirst();

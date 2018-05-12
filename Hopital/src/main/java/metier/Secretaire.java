@@ -1,6 +1,16 @@
 package metier;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.LinkedList;
+
 public class Secretaire extends Personnel {
+	
+	private String serPath = "C:\\Users\\pierre\\Desktop\\secretaire.ser";
 
 	public Secretaire(String nom) {
 		super(nom);
@@ -16,17 +26,30 @@ public class Secretaire extends Personnel {
 		Hopital.getInstance().ajouterPatientAttente(pin);
 	}
 	
+	public void partirEnPause() throws IOException {
+		FileOutputStream fos = new FileOutputStream(serPath);
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		
+		oos.writeObject(Hopital.getInstance().getListeAttente());
+		oos.close();
+		fos.close();
+		System.out.println("Liste d'attente sauvegardée");
+		Hopital.getInstance().viderListeAttente();
+		System.out.println("Secrétaire parti(e) en pause");
+	}
 	
-	// partir en pause
-	/* Sérialiser la liste d'attente
-	 * Mettre à 0 Hopital.listeAttente
-	 * 
-	 */
-	
+	public void revenirDePause() throws IOException, ClassNotFoundException {
+		FileInputStream fis = new FileInputStream(serPath);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		
+		@SuppressWarnings("unchecked")
+		LinkedList<Patient> list = (LinkedList<Patient>) ois.readObject();
+		ois.close();
+		fis.close();
+		System.out.println("Liste d'attente récupérée");
+		Hopital.getInstance().setListeAttente(list);
+		System.out.println("Secrétaire revenu(e) de pause");
+		
+	}
 
-	/*
-	 * revenir de pause
-	 * Dé sérialiser la liste
-	 * Re remplir Hopital.listeAttente
-	 */
 }

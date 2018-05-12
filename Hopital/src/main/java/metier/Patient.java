@@ -1,6 +1,8 @@
 package metier;
 
-public class Patient {
+import java.io.Serializable;
+
+public class Patient implements Serializable{
 	private String id;
 	private String nom, prenom, tel, adresse;
 	
@@ -18,7 +20,9 @@ public class Patient {
 	{
 		this.id=id;
 		this.nom=nom;
-		this.prenom=prenom;			
+		this.prenom=prenom;	
+		this.tel="";
+		this.adresse="";
 	}
 	
 	public static Patient getPatient(int numeroSecu)
