@@ -11,6 +11,22 @@ public class Medecin extends Personnel {
 	private Patient patientEnCours = null;
 	private ArrayList<Visite> listeVisites;
 
+	public Patient getPatientEnCours() {
+		return patientEnCours;
+	}
+
+	public void setPatientEnCours(Patient patientEnCours) {
+		this.patientEnCours = patientEnCours;
+	}
+
+	public ArrayList<Visite> getListeVisites() {
+		return listeVisites;
+	}
+
+	public void setListeVisites(ArrayList<Visite> listeVisites) {
+		this.listeVisites = listeVisites;
+	}
+
 	public Medecin(String nom) {
 		super(nom);
 		// TODO Auto-generated constructor stub
