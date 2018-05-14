@@ -112,11 +112,21 @@ public class Menu {
 				}
 				break;
 			case "d":
-				//TODO Partir en pause
-				break;
-			case "e":
-				//TODO Revenir en pause
-				break;
+			try {
+				p2.partirEnPause();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "e":
+			try {
+				p2.revenirDePause();
+			} catch (ClassNotFoundException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 			case "f":
 				isConnected = false;
 				System.out.println("\n"+p1.getNom()+" au revoir !\n");
@@ -138,8 +148,7 @@ public class Menu {
 			System.out.println("C. Liberer salle");
 			System.out.println("D. Partir en pause");
 			//Appeler peutPartir(); qui renvoi un boolean autorisant ou non la pause(patient en cours) 
-			System.out.println("E. Revenir de pause");
-			System.out.println("F. Deconnection");
+			System.out.println("E. Deconnection");
 
 			Scanner in = new Scanner(System.in);
 			String choixMenu = in.nextLine();
@@ -157,14 +166,28 @@ public class Menu {
 				break;
 			case "c":
 				//TODO Liberer salle
+				try {
+					p2.terminerVisite();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 			case "d":
 				//TODO Partir en pause
+				if (p2.peutPartir()) {
+					try {
+						p2.partirEnPause();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else {
+					System.out.println("Le médecin ne peut pas partir en pause, il est encore en train de traiter un patient !");
+				}
 				break;
-			case "e":
-				//TODO Revenir en pause
-				break;
-			case "f":	
+			case "e":	
 				isConnected = false;
 				System.out.println("\n"+p1.getNom()+" au revoir !\n");
 				try {
