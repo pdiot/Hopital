@@ -23,7 +23,8 @@ public class Medecin extends Personnel {
 	
 	public void accueillirPatient() {
 		if (Hopital.getInstance().restePatientEnAttente()) {
-			this.patientEnCours = Hopital.getInstance().getPatientATraiter();			
+			this.patientEnCours = Hopital.getInstance().getPatientATraiter();
+			System.out.println("Patient accueuilli : " + patientEnCours.toString());
 		} else {
 			System.out.println("Aucun patient Ã  traiter");
 		}
@@ -36,6 +37,7 @@ public class Medecin extends Personnel {
 	
 	@SuppressWarnings("deprecation")
 	public void terminerVisite() throws SQLException {
+		System.out.println("Visite terminée");
 		ajouterVisite(new Visite(this.patientEnCours.getId(), nom, new Date(118, 5, 11)));
 		this.patientEnCours = null;
 	}
@@ -53,6 +55,7 @@ public class Medecin extends Personnel {
 			dao.insert(vis);
 		}
 		listeVisites = new ArrayList<Visite>();
+		System.out.println("Visites enregistrées en base");
 	}
 	
 	public boolean peutPartir() {
@@ -66,6 +69,7 @@ public class Medecin extends Personnel {
 	
 	public void partirEnPause() throws SQLException {
 		enregisterVisites();
+		System.out.println("Le médecin est parti. Bonne soirée !");
 	}
 	
 

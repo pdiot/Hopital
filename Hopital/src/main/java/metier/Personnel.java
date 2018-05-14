@@ -1,5 +1,7 @@
 package metier;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 public class Personnel {
@@ -44,5 +46,6 @@ public class Personnel {
 	public LinkedList<Patient> getListeAttente() {
 		return Hopital.getInstance().getListeAttente();
 	}
+	
 
 }

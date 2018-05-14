@@ -24,6 +24,7 @@ public class Secretaire extends Personnel {
 	
 	public void ajouterPatient(Patient pin) {
 		Hopital.getInstance().ajouterPatientAttente(pin);
+		System.out.println("Patient ajout� : " + pin.toString());
 	}
 	
 	public void partirEnPause() throws IOException {
@@ -33,9 +34,9 @@ public class Secretaire extends Personnel {
 		oos.writeObject(Hopital.getInstance().getListeAttente());
 		oos.close();
 		fos.close();
-		System.out.println("Liste d'attente sauvegardée");
+		System.out.println("Liste d'attente sauvegardee");
 		Hopital.getInstance().viderListeAttente();
-		System.out.println("Secrétaire parti(e) en pause");
+		System.out.println("Secretaire parti(e) en pause");
 	}
 	
 	public void revenirDePause() throws IOException, ClassNotFoundException {

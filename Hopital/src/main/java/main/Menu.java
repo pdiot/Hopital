@@ -1,6 +1,7 @@
 package main;
 import metier.*;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -59,6 +60,8 @@ public class Menu {
 		System.out.println("E. Revenir de pause");
 		System.out.println("F. Deconnection");
 		
+		Secretaire p2 = (Secretaire) p1; 
+		
 		Scanner in = new Scanner(System.in);
 		String choixMenu = in.nextLine();
 		
@@ -105,10 +108,20 @@ public class Menu {
 			}
 			break;
 		case "d":
-			//TODO Partir en pause
+			try {
+				p2.partirEnPause();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case "e":
-			//TODO Revenir en pause
+			try {
+				p2.revenirDePause();
+			} catch (ClassNotFoundException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case "f":
 			//TODO Deconnection
@@ -120,14 +133,14 @@ public class Menu {
 	
 	public static void afficheMenuMedecin()
 	{
+		Medecin p2 = (Medecin) p1;
 		while(true)
 		{
 			System.out.println("A. Afficher la liste d'attente");
-			System.out.println("B. Liberer salle");
+			System.out.println("B. Terminer la visite");
 			System.out.println("C. Partir en pause");
-			//Appeler peutPartir(); qui renvoi un boolean autorisant ou non la pause(patient en cours) 
-			System.out.println("D. Revenir de pause");
-			System.out.println("E. Deconnection");
+			//Appeler peutPartir(); qui renvoi un boolean autorisant ou non la pause(patient en cours) ;
+			System.out.println("D. Deconnection");
 
 			Scanner in = new Scanner(System.in);
 			String choixMenu = in.nextLine();
@@ -142,14 +155,28 @@ public class Menu {
 				break;
 			case "b":
 				//TODO Liberer salle
+				try {
+					p2.terminerVisite();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 			case "c":
 				//TODO Partir en pause
+				if (p2.peutPartir()) {
+					try {
+						p2.partirEnPause();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else {
+					System.out.println("Le médecin ne peut pas partir en pause, il est encore en train de traiter un patient !");
+				}
 				break;
-			case "d":
-				//TODO Revenir en pause
-				break;
-			case "e":	
+			case "d":	
 				//TODO Deconnecter
 				break;
 			default:
